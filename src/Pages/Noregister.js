@@ -12,7 +12,7 @@ export const Noregister = () => (
                 <Fragment>
                     <Registermutation>
                         
-                        //autentication con graphql
+                      
                         {
                             (register) => {
                                 const onsubmit = ({email,password}) =>{
