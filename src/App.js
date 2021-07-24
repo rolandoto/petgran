@@ -39,7 +39,7 @@ export const App = () => {
      <Logo/>
  
 {/*aqui decim */}
- 
+      <h1>rolando</h1>
       <Router>
         <Home path='/'/>
         {/**este id yo se lo estoy pasando por medio del path 
