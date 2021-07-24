@@ -11,7 +11,7 @@ export const Noregister = () => (
             return(
                 <Fragment>
                     <Registermutation>
-
+                        
                         //autentication con graphql
                         {
                             (register) => {
