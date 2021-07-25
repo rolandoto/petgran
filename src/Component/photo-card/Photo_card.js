@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import {ImgWraper,Img,Button,Article, Div} from './Style'
 
-import { UseLocalStorage } from '../../Hooks/UseLocalStorage'
+
 import { UsenearScrean } from '../../Hooks/UsenearScrean'
 import { Favbutton } from '../../Favbutton/Favbutton'
 import { ToggleLikeMutation } from '../../containers/TogleLikeMutacion'
@@ -9,21 +9,10 @@ import { Link } from '@reach/router'
 
 
 
-export const Photo_card = ({id,likes ,src}) => {
+export const Photo_card = ({id,likes = 0,liked ,src}) => {
     //custon hooks insertion observation
     const [show,element] = UsenearScrean()
-    //like me gusta
-    const key = `like${id}`
-    console.log(key)
-    const [liked,setlike] = UseLocalStorage(key,false)
-      
-  
-    
-    const handclikLike = () => {
-        setlike(!liked)
-       
-    }
-
+     //like me gusta  
 
     //todo esto pasa con el ternario
     return (
@@ -49,12 +38,13 @@ export const Photo_card = ({id,likes ,src}) => {
                 {/*mutaciones  de like */}
                 {
             (togglelike) =>{
-               
+                    //aqui hace unamutacion
                 const handclikLike = () => {
-                    !liked && togglelike({variables: {
+                    togglelike({variables: {
                         input :{id}
+                        
                     }})
-                    setlike(!liked)
+                 
                    
                 }
             

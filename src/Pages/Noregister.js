@@ -1,42 +1,59 @@
-import React, { Fragment } from 'react'
-import { Registermutation } from '../containers/RegisterMutation'
-import Context from '../Context'
+import React, { Fragment,useContext } from 'react'
+import { LoginMutation } from '../containers/LoginMutation'
+import { RegisterMutation } from '../containers/RegisterMutation'
+import {Context} from '../Context'
 import { Useform } from '../Useform/Useform'
 
-export const Noregister = () => (
-    <Context.Consumer>
-    {
-        ({activateAuth}) => {
+export const Noregister = () => {
+    const {activateAuth} = useContext(Context) 
+
+   
         
             return(
                 <Fragment>
-                    <Registermutation>
-                        
-                      
+                    <RegisterMutation>
                         {
-                            (register) => {
-                                const onsubmit = ({email,password}) =>{
+                            (register,{data,loading,error}) => {
+                                const onsubmit = ({email, password}) =>{
                                     const input = {email,password}
                                     const variables = {input}
-                                    register({variables}).then(activateAuth)
+                                    register({variables}).then(({data}) => {
+                                        const {signup} = data 
+                                        
+                                        activateAuth(signup)
+                                    })
                                 }
-                                return <Useform  onSubmit={onsubmit} title="Registrarse"/> 
+
+                                const errorMsg = error && 'El usuario ya existe o hay algún problema.'
+
+                                return <Useform error={errorMsg} disabled={loading}   onSubmit={onsubmit} title="Registrarse"/> 
                             }
                         }
-                    </Registermutation>
-                     
+                    </RegisterMutation>
+                       
+                            {/**mutatacion de login y signup */}
+                        <LoginMutation>
+                            {
 
-                        <Useform  onSubmit={activateAuth} title="iniar seccion "/>
-
+                                (login,{data,loading,error} ) =>{
+                                    const onsubmit = ({email, password}) =>{
+                                            const input = {email,password}
+                                            const variables = {input}
+                                            login({variables}).then(({data}) => {
+                                                const {login} = data
+                                                activateAuth(login ) 
+                                            })
+                                        }
+                                    const errorMsg = error && 'El usuario ya existe o hay algún problema.'
+                                    
+                                    return  <Useform disabled={loading} error={errorMsg} onSubmit={onsubmit} title="iniar seccion" /> 
+                                }
+                            }
+                            
+                        </LoginMutation>
                 </Fragment>
-              
-            )
-
-        }
-    }
-</Context.Consumer>
-
-
+           
+    
 )
-   
-     
+        
+}

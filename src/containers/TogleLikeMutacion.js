@@ -5,13 +5,13 @@ import { Mutation } from "react-apollo";
 
 
 const LIKE_PHOTO = gql`
-mutation likeAnomymous($input:LikePhoto!){
-    likeAnonymousPhoto(input:$input){
-            id,
-            likes
-            liked
-            }
-}
+mutation likePhoto($input: LikePhoto!) {
+    likePhoto(input: $input) {
+      id,
+      liked,
+      likes
+    }
+  }
 
 `
 

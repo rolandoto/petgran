@@ -21,6 +21,7 @@ export const Nav = styled.nav`
   right: 0;
   width: 100%;
   z-index: 1000;
+  
 `
 
 export const Link = styled(LinkRouter)`

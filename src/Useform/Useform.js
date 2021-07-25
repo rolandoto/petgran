@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import { UseInput } from '../Hooks/Useinput'
-import { Button, Form,Input,Title } from './style'
+import { Error,Button, Form,Input,Title } from './style'
 
 
 
-export const Useform = ({onSubmit,title}) => {
+export const Useform = ({error,onSubmit,title,disabled}) => {
 
    const email =  UseInput('')
    const password = UseInput('')
@@ -17,13 +17,15 @@ export const Useform = ({onSubmit,title}) => {
     return (
         <Fragment>
 
+           
+            <Form disabled={disabled} onSubmit={hansubmit}> 
             <Title>{title}</Title>
-            <Form onSubmit={hansubmit}> 
-                <Input placeholder="Email"  {...email}/>
-                <Input placeholder="password" type="password"   {...password} />
-                <Button>{title}</Button> 
+                <Input disabled={disabled} placeholder="Email"  {...email}/>
+                <Input disabled={disabled} placeholder="password" type="password"   {...password} />
+                <Button disabled={disabled}>{title}</Button> 
                     
             </Form>
+            {error && <Error>{error}</Error>}
         </Fragment>
     )
 }
